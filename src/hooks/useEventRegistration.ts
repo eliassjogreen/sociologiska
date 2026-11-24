@@ -42,9 +42,7 @@ function getConfirmErrorMessage(cause: unknown) {
 function getRegisterErrorMessage(cause: unknown) {
   if (cause instanceof ApiError && cause.status === 409) {
     return ALREADY_CONFIRMED_MESSAGE;
-  }
-
-  else if (cause instanceof ApiError && cause.status === 404) {
+  } else if (cause instanceof ApiError && cause.status === 404) {
     return COULDNT_FIND_EVENT;
   }
 
