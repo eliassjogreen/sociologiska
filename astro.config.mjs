@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, envField } from "astro/config";
+import { defineConfig, envField, logHandlers } from "astro/config";
 import node from "@astrojs/node";
 import preact from "@astrojs/preact";
 
@@ -11,11 +11,7 @@ export default defineConfig({
   }),
   integrations: [preact()],
 
-  i18n: {
-    locales: ["sv"],
-    defaultLocale: "sv",
-  },
-
+  logger: logHandlers.console(),
   server: {
     host: true,
   },
