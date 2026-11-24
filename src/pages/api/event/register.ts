@@ -44,19 +44,25 @@ export const POST: APIRoute = async ({ request }) => {
 
   const event = getEvent(parsedPayload.data.event);
   if (!event) {
-    console.warn(`${formatAttendee(parsedPayload.data.attendee)} tried to register for ${parsedPayload.data.event} which does not exist`);
+    console.warn(
+      `${formatAttendee(parsedPayload.data.attendee)} tried to register for ${parsedPayload.data.event} which does not exist`,
+    );
     return notFoundResponse("Event not found");
   }
 
   const registrationStatus = getRegistrationStatus(new Date(), event);
 
   if (registrationStatus === "upcoming") {
-    console.warn(`${formatAttendee(parsedPayload.data.attendee)} tried to register for ${parsedPayload.data.event} before registration opened`);
+    console.warn(
+      `${formatAttendee(parsedPayload.data.attendee)} tried to register for ${parsedPayload.data.event} before registration opened`,
+    );
     return forbiddenResponse("Registration has not opened yet");
   }
 
   if (registrationStatus === "closed") {
-    console.warn(`${formatAttendee(parsedPayload.data.attendee)} tried to register for ${parsedPayload.data.event} after registration closed`);
+    console.warn(
+      `${formatAttendee(parsedPayload.data.attendee)} tried to register for ${parsedPayload.data.event} after registration closed`,
+    );
     return forbiddenResponse("Registration has closed");
   }
 

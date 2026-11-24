@@ -1,7 +1,7 @@
 services:
-  web:
+  server:
     build:
-      target: runtime
+      target: server
       dockerfile: Dockerfile
     ports:
       - "4123:4123"

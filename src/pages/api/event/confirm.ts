@@ -33,7 +33,9 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   if (!hasEvent(parsedPayload.data.event)) {
-    console.warn(`${formatAttendee(parsedPayload.data.attendee)} tried to confirm their payment for ${parsedPayload.data.event} which does not exist`);
+    console.warn(
+      `${formatAttendee(parsedPayload.data.attendee)} tried to confirm their payment for ${parsedPayload.data.event} which does not exist`,
+    );
     return notFoundResponse("Event not found");
   }
 

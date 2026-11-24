@@ -23,7 +23,7 @@ export const events: EventConfig[] = [
     swishNumber: "0738303933",
     offerSongbook: true,
     // Placeholder dates, confirm before release.
-    registrationStart: new Date("2026-11-24T03:05:30+01:00"), // new Date("2026-11-25T12:00:00+01:00"),
+    registrationStart: new Date("2026-11-23T23:59:00+01:00"), // new Date("2026-11-25T12:00:00+01:00"),
     registrationEnd: new Date("2026-12-16T23:59:00+01:00"),
     image: julful2026Image,
     imageAlt: "En julig omslagsbild med Kalle Anka karaktärer",

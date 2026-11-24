@@ -22,7 +22,7 @@ COPY ./src/ ./src
 FROM script AS export
 CMD ["node", "./src/scripts/export.ts"]
 
-FROM base AS runtime
+FROM base AS server
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 
