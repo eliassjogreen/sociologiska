@@ -77,5 +77,3 @@ export async function readJsonPayload(
 export function formatAttendee(attendee: { name: string; email?: string; phone: string }) {
   return `${attendee.name} (${attendee.phone}${attendee.email ? `, <${attendee.email}>` : ""})`;
 }
-
-export function getEventBySlug(eventSlug: string) {}

@@ -1,4 +1,4 @@
-import { database } from "../database";
+import { database } from "./database";
 import type { AttendeePayload } from "../lib/event/attendee";
 import type { PaymentMode } from "../lib/event/payment";
 

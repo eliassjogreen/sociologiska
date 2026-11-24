@@ -64,6 +64,7 @@ export async function loadMigrations(dir: string) {
     );
 
     try {
+      /* @vite-ignore */
       const { default: migration } = await import(pathToFileURL(path).href);
       migration.name ??= name;
       migrations.push(migration);
