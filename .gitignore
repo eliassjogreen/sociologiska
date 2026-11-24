@@ -20,6 +20,8 @@ pnpm-debug.log*
 # development databases
 db
 *.sqlite
+*-shm
+*-wal
 
 # macOS-specific files
 .DS_Store

@@ -18,7 +18,7 @@ function getOptionalString(formData: FormData, field: string): string | undefine
 export function getAttendeePayload(formData: FormData): AttendeePayload {
   return {
     name: getTrimmedString(formData, "name"),
-    email: getOptionalString(formData, "mail"),
+    email: getOptionalString(formData, "email"),
     phone: getTrimmedString(formData, "phone"),
     wantsNeighbor: getOptionalString(formData, "wants-neighbor"),
     dietaryPreferences: getOptionalString(formData, "specialkost"),
