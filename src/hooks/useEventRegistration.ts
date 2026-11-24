@@ -19,15 +19,33 @@ const SUBMIT_ERROR_MESSAGE =
 const ALREADY_CONFIRMED_MESSAGE =
   "Din anmälan är redan bekräftad och kan inte ändras. Kontakta oss på sociologi.foreningen.uu@gmail.com om du behöver göra en ändring.";
 
+const COULDNT_FIND_EVENT =
+  "Vi kunde inte hitta evenemanget du försökte anmäla dig till. Vänligen ladda om sidan och försök igen. Ifall felet kvarstår kontakta oss på sociologi.foreningen.uu@gmail.com";
+
+const COULDNT_FIND_REGISTRATION =
+  "Vi kunde inte hitta din anmälan, vänligen ladda om sidan och försök klicka på någon av betala knapparna igen. Om du redan har Swishat behöver du inte göra det igen.";
+
 const REGISTRATION_NOT_OPEN_MESSAGE = "Anmälan är inte öppen just nu.";
 
-function isAlreadyConfirmed(cause: unknown) {
-  return cause instanceof ApiError && cause.status === 409;
+function getConfirmErrorMessage(cause: unknown) {
+  if (cause instanceof ApiError && cause.status === 409) {
+    return ALREADY_CONFIRMED_MESSAGE;
+  }
+
+  if (cause instanceof ApiError && cause.status === 404) {
+    return COULDNT_FIND_REGISTRATION;
+  }
+
+  return null;
 }
 
 function getRegisterErrorMessage(cause: unknown) {
   if (cause instanceof ApiError && cause.status === 409) {
     return ALREADY_CONFIRMED_MESSAGE;
+  }
+
+  else if (cause instanceof ApiError && cause.status === 404) {
+    return COULDNT_FIND_EVENT;
   }
 
   if (cause instanceof ApiError && cause.status === 403) {
@@ -118,12 +136,13 @@ export function useEventRegistration({
         attendee: { name: attendee.name, phone: attendee.phone },
       });
     } catch (cause) {
-      console.error("Kunde inte bekräfta betalningen", cause);
-      if (isAlreadyConfirmed(cause)) {
-        setError(ALREADY_CONFIRMED_MESSAGE);
-      }
       setWait(null);
-      return;
+      console.error("Kunde inte bekräfta betalningen", cause);
+      const message = getConfirmErrorMessage(cause);
+      if (message) {
+        setError(message);
+        return;
+      }
     }
 
     pending.clearPayment();
