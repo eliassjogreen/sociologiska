@@ -1,0 +1,21 @@
+.header {
+  display: grid;
+  gap: 1rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+.description {
+  margin: 0;
+  color: var(--color-muted);
+  white-space: pre-line;
+}

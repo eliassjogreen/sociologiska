@@ -1,0 +1,59 @@
+---
+import styles from "./Footer.module.css";
+import Instagram from "./icons/Instagram.svg";
+import Facebook from "./icons/Facebook.svg";
+---
+
+<footer class={styles.footer}>
+  <nav class={styles.social} aria-label="Sociala medier">
+    <ul class={styles.iconLinks}>
+      <li>
+        <a
+          href="https://www.instagram.com/socuppsala/"
+          aria-label="Instagram"
+          class={styles.iconLink}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Instagram />
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://www.facebook.com/sociologiskaforeningen"
+          aria-label="Facebook"
+          class={styles.iconLink}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Facebook />
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <nav class={styles.links} aria-label="Footerlänkar">
+    <ul class={styles.linkList}>
+      <li>
+        <a class={styles.footerLink} href="/stadgar.pdf">
+          Stadgar
+        </a>
+      </li>
+      <li>
+        <a class={styles.footerLink} href="/utlaggsblankett.pdf">
+          Utläggsblankett
+        </a>
+      </li>
+      <li>
+        <a
+          class={styles.footerLink}
+          href="mailto:sociologi.foreningen.uu@gmail.com"
+        >
+          Kontakta oss
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <p class={styles.meta}>Anno 2021 – © Sociologiska Föreningen SOC</p>
+</footer>

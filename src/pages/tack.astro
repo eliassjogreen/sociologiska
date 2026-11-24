@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets";
+
+import Layout from "../layouts/Layout.astro";
+import logo from "./logo.png";
+import Footer from "../components/Footer.astro";
+import styles from "./index.module.css";
+---
+
+<Layout title="Tack för din anmälan!" lang="sv">
+  <main class={styles.home}>
+    <section class={styles.content} aria-label="Tack för din anmälan">
+      <Image src={logo} alt="Sociologiska föreningens logotyp" class={styles.logo} />
+
+      <h1 class={styles.title}>Tack för din anmälan!</h1>
+
+      <p class={styles.description}>
+        Vi har mottagit din anmälan, vi ses där! Om du har frågor eller funderingar kan du kontakta
+        oss på{" "}
+        <a href="mailto:sociologi.foreningen.uu@gmail.com">sociologi.foreningen.uu@gmail.com</a>{" "}
+        eller vår <a href="https://www.instagram.com/sociologiska/">Instagram</a>.
+      </p>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>

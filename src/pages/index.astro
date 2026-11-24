@@ -1,0 +1,26 @@
+---
+import { Image } from "astro:assets";
+
+import Layout from "../layouts/Layout.astro";
+import logo from "./logo.png";
+import Footer from "../components/Footer.astro";
+import styles from "./index.module.css";
+---
+
+<Layout title="Sociologiska föreningen – SOC" lang="sv">
+  <main class={styles.home}>
+    <section class={styles.content} aria-label="Om föreningen">
+      <Image src={logo} alt="Sociologiska föreningens logotyp" class={styles.logo} />
+
+      <p class={styles.description}>
+        Vi ämnar samla och engagera sociologistudenter, dels genom att erbjuda en social mötesplats,
+        dels genom att hjälpa till att förbättra studietid och studievillkor. Vårt fokus ligger på
+        att bidra till en bättre gemenskap för sociologistudenter genom att anordna olika fester och
+        evenemang, för att således bli startskottet för en lång och gedigen sociologitradition i
+        Uppsala.
+      </p>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>

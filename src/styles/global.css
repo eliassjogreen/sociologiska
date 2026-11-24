@@ -1,0 +1,31 @@
+:root {
+  --color-text: #18181b;
+  --color-muted: #52525b;
+  --color-mutedish: #71717a;
+  --color-border: #d4d4d8;
+  --color-surface: #ffffff;
+  --color-backdrop: rgb(0 0 0 / 0.5);
+  --color-primary: #059669;
+  --color-primary-hover: #047857;
+  --radius-md: 0.5rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--color-text);
+  background: var(--color-surface);
+  font-family: Inter, "Avenir Next", "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+}
+
+[hidden] {
+  display: none !important;
+}

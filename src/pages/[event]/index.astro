@@ -1,0 +1,38 @@
+---
+import { getImage } from "astro:assets";
+
+import Layout from "../../layouts/Layout.astro";
+import { EventForm } from "../../components/event/EventForm";
+import { events } from "../../lib/event/events";
+
+export function getStaticPaths() {
+  return events.map((event) => ({
+    params: { event: event.slug },
+    props: { event },
+  }));
+}
+
+const { event } = Astro.props;
+
+const optimizedImage = await getImage({
+  src: event.image,
+});
+---
+
+<Layout title={event.name}>
+  <EventForm
+    client:load
+    name={event.name}
+    slug={event.slug}
+    basePrice={event.basePrice}
+    membershipRequired={event.membershipRequired}
+    swishNumber={event.swishNumber}
+    imageSrc={optimizedImage.src}
+    imageSrcSet={optimizedImage.srcSet.values.join(", ")}
+    imageAlt={event.imageAlt}
+    description={event.description}
+    offerSongbook={event.offerSongbook}
+    registrationStart={event.registrationStart}
+    registrationEnd={event.registrationEnd}
+  />
+</Layout>
