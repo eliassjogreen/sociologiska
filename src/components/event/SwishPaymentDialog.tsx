@@ -28,7 +28,7 @@ export function SwishPaymentDialog({
   onClose,
 }: SwishPaymentDialogProps) {
   const shown = useLastNonNull(payment);
-  const isQr = shown?.view === "qr";
+  const isQr = shown?.mode === "qr";
   const qrDataUrl = useQrDataUrl(isQr ? shown.swishUrl : null);
 
   return (
@@ -44,8 +44,8 @@ export function SwishPaymentDialog({
         </Button>,
         <LinkButton href={shown?.swishUrl} target="_blank" rel="noreferrer">
           {isQr
-            ? `Öppna Swish på denna enhet (${shown?.amount} kr)`
-            : `Öppna appen igen (${shown?.amount} kr)`}
+            ? `Öppna Swish på denna enhet (${shown?.total} kr)`
+            : `Öppna appen igen (${shown?.total} kr)`}
         </LinkButton>,
         !isQr && <Button onClick={onShowQr}>Visa QR-kod</Button>,
         <Button onClick={onCancel}>Avbryt</Button>,

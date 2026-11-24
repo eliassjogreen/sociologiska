@@ -1,12 +1,14 @@
+import type { AttendeePayload } from "./attendee";
+
 export const SONGBOOK_PRICE = 90;
 
 export type PaymentMode = "swish" | "qr";
-export type PaymentView = "app" | "qr";
 
 export interface PendingPayment {
   swishUrl: string;
-  amount: number;
-  view: PaymentView;
+  total: number;
+  mode: PaymentMode;
+  attendee: AttendeePayload;
 }
 
 export function calculateTotal(basePrice: number, selectedAddonPrices: number[]): number {
@@ -47,7 +49,11 @@ function isPendingPayment(value: unknown): value is PendingPayment {
   return (
     typeof candidate.swishUrl === "string" &&
     typeof candidate.amount === "number" &&
-    (candidate.view === "app" || candidate.view === "qr")
+    (candidate.mode === "swish" || candidate.mode === "qr") &&
+    typeof candidate.attendee === "object" &&
+    candidate.attendee !== null &&
+    typeof (candidate.attendee as Record<string, unknown>).name === "string" &&
+    typeof (candidate.attendee as Record<string, unknown>).phone === "string"
   );
 }
 

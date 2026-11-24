@@ -83,12 +83,13 @@ export function useEventRegistration({
     const swishUrl = createSwishUrl({
       swishNumber,
       amount: total,
-      message: `${eventSlug}: ${attendee.name || "Anmälan"}`,
+      message: `${eventSlug}: ${attendee.name}`,
     });
     const payment: PendingPayment = {
       swishUrl,
-      amount: total,
-      view: mode === "qr" ? "qr" : "app",
+      total,
+      mode,
+      attendee,
     };
 
     setError(null);
@@ -152,7 +153,7 @@ export function useEventRegistration({
       return;
     }
 
-    const updated: PendingPayment = { ...pending.payment, view: "qr" };
+    const updated: PendingPayment = { ...pending.payment, mode: "qr" };
     pending.storePayment(updated);
     pending.showPayment(updated);
   }
