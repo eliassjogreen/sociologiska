@@ -44,8 +44,8 @@ export function SwishPaymentDialog({
         </Button>,
         <LinkButton href={shown?.swishUrl} target="_blank" rel="noreferrer">
           {isQr
-            ? `Öppna Swish på denna enhet (${shown?.total} kr)`
-            : `Öppna appen igen (${shown?.total} kr)`}
+            ? `Öppna Swish på denna enhet (${shown?.amount} kr)`
+            : `Öppna appen igen (${shown?.amount} kr)`}
         </LinkButton>,
         !isQr && <Button onClick={onShowQr}>Visa QR-kod</Button>,
         <Button onClick={onCancel}>Avbryt</Button>,

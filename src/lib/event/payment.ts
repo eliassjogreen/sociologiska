@@ -6,7 +6,7 @@ export type PaymentMode = "swish" | "qr";
 
 export interface PendingPayment {
   swishUrl: string;
-  total: number;
+  amount: number;
   mode: PaymentMode;
   attendee: AttendeePayload;
 }

@@ -87,7 +87,7 @@ export function useEventRegistration({
     });
     const payment: PendingPayment = {
       swishUrl,
-      total,
+      amount: total,
       mode,
       attendee,
     };
@@ -119,12 +119,12 @@ export function useEventRegistration({
   }
 
   async function confirmPayment() {
-    const form = formRef.current;
-    if (!form) {
+    const attendee = pending.payment?.attendee;
+
+    if (!attendee) {
+      setError(COULDNT_FIND_REGISTRATION);
       return;
     }
-
-    const attendee = getAttendeePayload(new FormData(form));
 
     setError(null);
     setWait("confirming");
