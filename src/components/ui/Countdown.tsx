@@ -1,3 +1,4 @@
+import { cx } from "../../lib/classNames";
 import { getCountdownParts, type CountdownParts } from "../../lib/countdown";
 import styles from "./Countdown.module.css";
 
@@ -9,14 +10,15 @@ const UNITS: ReadonlyArray<{ key: keyof CountdownParts; label: string }> = [
 ];
 
 export interface CountdownProps {
+  className?: string;
   remainingMs: number;
 }
 
-export function Countdown({ remainingMs }: CountdownProps) {
+export function Countdown({ remainingMs, className }: CountdownProps) {
   const parts = getCountdownParts(remainingMs);
 
   return (
-    <dl className={styles.countdown}>
+    <dl className={cx(styles.countdown, className)}>
       {UNITS.map(({ key, label }) => (
         <div key={key} className={styles.unit}>
           <dt className={styles.label}>{label}</dt>

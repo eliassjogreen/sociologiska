@@ -11,7 +11,9 @@ export function RegistrationNotice(props: RegistrationNoticeProps) {
     return (
       <section className={styles.notice}>
         <h2 className={styles.title}>Anmälan är stängd</h2>
-        <p className={styles.text}>Det går inte längre att anmäla sig till evenemanget.</p>
+        <p className={styles.text}>
+          Attans bananer, det går inte längre att anmäla sig till evenemanget.
+        </p>
       </section>
     );
   }
@@ -19,8 +21,10 @@ export function RegistrationNotice(props: RegistrationNoticeProps) {
   return (
     <section className={styles.notice}>
       <h2 className={styles.title}>Anmälan öppnar snart</h2>
-      <p className={styles.text}>Anmälan öppnar {formatRegistrationDateTime(props.startsAt)}.</p>
-      <Countdown remainingMs={props.remainingMs} />
+      <p className={styles.text}>
+        Sakta i backarna, anmälan öppnar först {formatRegistrationDateTime(props.startsAt)}.
+      </p>
+      <Countdown className={styles.countdown} remainingMs={props.remainingMs} />
     </section>
   );
 }
