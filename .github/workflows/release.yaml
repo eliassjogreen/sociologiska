@@ -18,9 +18,8 @@ jobs:
       matrix:
         include:
           - target: server
-            image_suffix: "-server"
+          - target: migrate
           - target: export
-            image_suffix: "-export"
 
     permissions:
       contents: read
@@ -43,7 +42,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v6
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}${{ matrix.image_suffix }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ matrix.target }}
 
       - name: Build and push Docker image
         id: push
@@ -58,6 +57,6 @@ jobs:
       - name: Generate artifact attestation
         uses: actions/attest@v4
         with:
-          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}${{ matrix.image_suffix }}
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ matrix.target }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true

@@ -20,11 +20,17 @@ COPY --from=prod-deps /app/node_modules ./node_modules
 COPY ./src/ ./src
 
 FROM script AS export
-CMD ["node", "./src/scripts/export.ts"]
+ENV INTERVAL=3600
+CMD ["sh", "-c", "while true; do node ./src/scripts/export.ts; sleep \"$INTERVAL\"; done"]
+
+FROM script AS migrate
+ENV APPLY_MIGRATIONS=true
+CMD ["node", "./src/scripts/migrate.ts"]
 
 FROM base AS server
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
+COPY ./src/server/migrations ./src/server/migrations
 
 ENV HOST=0.0.0.0
 ENV PORT=4321
