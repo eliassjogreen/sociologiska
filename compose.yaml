@@ -1,8 +1,7 @@
 services:
   web:
-    build: .
+    build:
+      target: runtime
+      dockerfile: Dockerfile
     ports:
-      - "${APP_PORT}:4123"
-    environment:
-      - REDIS_HOST=${REDIS_HOST}
-      - REDIS_PORT=${REDIS_PORT}
+      - "4123:4123"
