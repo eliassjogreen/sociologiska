@@ -8,9 +8,15 @@ const schema = z.object({
   /** The database path. Defaults to an in memory database */
   DATABASE: z.string().default(":memory:"),
   /** The target database version. Defaults to the latest migration */
-  TARGET_VERSION: z.number().int().optional(),
+  TARGET_VERSION: z
+    .string()
+    .optional()
+    .transform((value) => (value ? parseInt(value, 10) : undefined)),
   /** Whether to apply migrations. Defaults to true if the database is in memory */
-  APPLY_MIGRATIONS: z.boolean().optional(),
+  APPLY_MIGRATIONS: z
+    .string()
+    .transform((value) => value === "true")
+    .optional(),
 });
 
 const config = schema.parse(process.env);
