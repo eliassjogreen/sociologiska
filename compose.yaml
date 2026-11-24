@@ -17,7 +17,8 @@ services:
       target: server
       dockerfile: Dockerfile
     depends_on:
-      - migrate
+      migrate:
+        condition: service_completed_successfully
     env_file: .env
     environment:
       DATABASE: /app/data/sociologiska.db
@@ -33,7 +34,8 @@ services:
       target: export
       dockerfile: Dockerfile
     depends_on:
-      - migrate
+      migrate:
+        condition: service_completed_successfully
     env_file: .env
     environment:
       DATABASE: /app/data/sociologiska.db
