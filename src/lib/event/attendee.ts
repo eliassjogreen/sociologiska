@@ -21,7 +21,7 @@ export function getAttendeePayload(formData: FormData): AttendeePayload {
     email: getOptionalString(formData, "email"),
     phone: getTrimmedString(formData, "phone"),
     wantsNeighbor: getOptionalString(formData, "wants-neighbor"),
-    dietaryPreferences: getOptionalString(formData, "specialkost"),
+    dietaryPreferences: getOptionalString(formData, "dietary-preferences"),
     wantsSongbook: formData.has("wants-songbook"),
   };
 }
