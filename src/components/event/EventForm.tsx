@@ -50,9 +50,7 @@ export function EventForm({
     formRef,
   });
   const now = useNow(1000);
-  const status = now
-    ? getRegistrationStatus(now, { registrationStart, registrationEnd })
-    : null;
+  const status = now ? getRegistrationStatus(now, { registrationStart, registrationEnd }) : null;
   const remainingMs = now ? registrationStart.getTime() - now.getTime() : 0;
 
   function handleSubmit(event: TargetedSubmitEvent<HTMLFormElement>) {
@@ -64,21 +62,14 @@ export function EventForm({
 
     const submitter = event.submitter;
     const mode =
-      submitter instanceof HTMLButtonElement && submitter.value === "qr"
-        ? "qr"
-        : "swish";
+      submitter instanceof HTMLButtonElement && submitter.value === "qr" ? "qr" : "swish";
 
     registration.startPayment(mode);
   }
 
   return (
     <section className={styles.root}>
-      <form
-        ref={formRef}
-        method="post"
-        className={styles.form}
-        onSubmit={handleSubmit}
-      >
+      <form ref={formRef} method="post" className={styles.form} onSubmit={handleSubmit}>
         {status === "open" && (
           <>
             <EventHeader
@@ -89,21 +80,9 @@ export function EventForm({
               imageAlt={imageAlt}
             />
 
-            <TextField
-              id="name"
-              name="name"
-              label="Namn"
-              autoComplete="name"
-              required
-            />
+            <TextField id="name" name="name" label="Namn" autoComplete="name" required />
 
-            <TextField
-              id="email"
-              name="email"
-              type="email"
-              label="E-Post"
-              autoComplete="email"
-            />
+            <TextField id="email" name="email" type="email" label="E-Post" autoComplete="email" />
 
             <TextField
               id="phone"
@@ -134,9 +113,7 @@ export function EventForm({
                 name="wants-songbook"
                 label={`Jag vill köpa sociologiska föreningens sångbok (${SONGBOOK_PRICE} kr)`}
                 checked={registration.songbook}
-                onChange={(event) =>
-                  registration.setSongbook(event.currentTarget.checked)
-                }
+                onChange={(event) => registration.setSongbook(event.currentTarget.checked)}
               />
             )}
 
@@ -169,10 +146,7 @@ export function EventForm({
         onClose={registration.closePayment}
       />
       <WaitDialog state={registration.wait} />
-      <ErrorDialog
-        message={registration.error}
-        onDismiss={registration.dismissError}
-      />
+      <ErrorDialog message={registration.error} onDismiss={registration.dismissError} />
     </section>
   );
 }

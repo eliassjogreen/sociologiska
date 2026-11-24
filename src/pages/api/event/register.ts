@@ -8,7 +8,7 @@ import {
   invalidPayloadResponse,
   notFoundResponse,
   readJsonPayload,
-} from "../../../utils";
+} from "../../../lib/utils";
 import { getEvent } from "../../../lib/event/events";
 import { getRegistrationStatus } from "../../../lib/event/registration";
 import { hasConfirmedOrVerifiedPayment, saveRegistration } from "../../../server/registrations";

@@ -20,7 +20,7 @@ export const TARGET_VERSION = config.TARGET_VERSION;
 export const APPLY_MIGRATIONS = config.APPLY_MIGRATIONS ?? config.DATABASE === ":memory:";
 // The bundled server can't resolve migrations relative to this module, so
 // they are read from the project root (where the server is started).
-export const MIGRATIONS_DIR = join(process.cwd(), "src/migrations/");
+export const MIGRATIONS_DIR = join(process.cwd(), "src/server/migrations/");
 
 export const database = new DatabaseSync(config.DATABASE);
 

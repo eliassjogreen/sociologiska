@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    ports:
+      - "${APP_PORT}:4123"
+    environment:
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}

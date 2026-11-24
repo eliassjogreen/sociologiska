@@ -7,7 +7,7 @@ import {
   invalidPayloadResponse,
   notFoundResponse,
   readJsonPayload,
-} from "../../../utils";
+} from "../../../lib/utils";
 import { hasEvent } from "../../../lib/event/events";
 import { confirmPayment, hasConfirmedOrVerifiedPayment } from "../../../server/registrations";
 
