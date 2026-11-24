@@ -44,20 +44,29 @@ export const POST: APIRoute = async ({ request }) => {
 
   const event = getEvent(parsedPayload.data.event);
   if (!event) {
+    console.warn(`${formatAttendee(parsedPayload.data.attendee)} tried to register for ${parsedPayload.data.event} which does not exist`);
     return notFoundResponse("Event not found");
   }
 
   const registrationStatus = getRegistrationStatus(new Date(), event);
+
   if (registrationStatus === "upcoming") {
+    console.warn(`${formatAttendee(parsedPayload.data.attendee)} tried to register for ${parsedPayload.data.event} before registration opened`);
     return forbiddenResponse("Registration has not opened yet");
   }
+
   if (registrationStatus === "closed") {
+    console.warn(`${formatAttendee(parsedPayload.data.attendee)} tried to register for ${parsedPayload.data.event} after registration closed`);
     return forbiddenResponse("Registration has closed");
   }
 
   if (hasConfirmedOrVerifiedPayment(parsedPayload.data.event, parsedPayload.data.attendee.phone)) {
     return conflictResponse("Registration or payment already confirmed");
   }
+
+  console.info(
+    `Processing registration to ${parsedPayload.data.event} for ${formatAttendee(parsedPayload.data.attendee)}`,
+  );
 
   saveRegistration(
     parsedPayload.data.event,
@@ -66,7 +75,7 @@ export const POST: APIRoute = async ({ request }) => {
   );
 
   console.info(
-    `Processing registration to ${parsedPayload.data.event} for ${formatAttendee(parsedPayload.data.attendee)}`,
+    `Registration saved for ${formatAttendee(parsedPayload.data.attendee)} to ${parsedPayload.data.event}`,
   );
 
   return Response.json({ ok: true });

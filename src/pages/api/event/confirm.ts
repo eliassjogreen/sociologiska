@@ -33,19 +33,30 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   if (!hasEvent(parsedPayload.data.event)) {
+    console.warn(`${formatAttendee(parsedPayload.data.attendee)} tried to confirm their payment for ${parsedPayload.data.event} which does not exist`);
     return notFoundResponse("Event not found");
   }
 
   if (hasConfirmedOrVerifiedPayment(parsedPayload.data.event, parsedPayload.data.attendee.phone)) {
+    console.warn(
+      `Registration or payment already confirmed for ${formatAttendee(parsedPayload.data.attendee)} to ${parsedPayload.data.event}`,
+    );
     return conflictResponse("Registration or payment already confirmed");
   }
 
+  console.info(
+    `Processing payment confirmation from ${formatAttendee(parsedPayload.data.attendee)} to ${parsedPayload.data.event}`,
+  );
+
   if (!confirmPayment(parsedPayload.data.event, parsedPayload.data.attendee.phone)) {
+    console.warn(
+      `Registration not found for ${formatAttendee(parsedPayload.data.attendee)} to ${parsedPayload.data.event}`,
+    );
     return notFoundResponse("Registration not found");
   }
 
   console.info(
-    `Processing payment confirmation from ${formatAttendee(parsedPayload.data.attendee)}`,
+    `Payment confirmed for ${formatAttendee(parsedPayload.data.attendee)} to ${parsedPayload.data.event}`,
   );
 
   return Response.json({ ok: true });
