@@ -32,11 +32,11 @@ export function createSwishUrl({
     sw: swishNumber,
     amt: String(amount),
     cur: "SEK",
-    msg: encodeURIComponent(message),
+    msg: message,
     src: "qr",
   });
 
-  return `https://app.swish.nu/1/p/sw/?${params.toString()}`;
+  return `https://app.swish.nu/1/p/sw/?${params.toString().replaceAll("+", "%20")}`;
 }
 
 function isPendingPayment(value: unknown): value is PendingPayment {
