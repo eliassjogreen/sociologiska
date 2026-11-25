@@ -19,7 +19,7 @@ export const events: EventConfig[] = [
   {
     slug: "julful-2026",
     name: "Sociologernas julfulsittning",
-    basePrice: 250,
+    basePrice: 230,
     swishNumber: "0738303933",
     offerSongbook: true,
     registrationStart: new Date("2026-11-25T12:00:00+01:00"),
