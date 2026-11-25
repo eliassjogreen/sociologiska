@@ -32,7 +32,7 @@ export function createSwishUrl({
     sw: swishNumber,
     amt: String(amount),
     cur: "SEK",
-    msg: message,
+    msg: encodeURIComponent(message),
     src: "qr",
   });
 
